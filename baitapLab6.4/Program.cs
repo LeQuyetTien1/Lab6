@@ -11,7 +11,7 @@ public class TestDelegate
     {
         foreach (int i in a)
         {
-            Console.WriteLine(i);
+            act(i);
         }
     }
 }
@@ -22,6 +22,7 @@ public class Program
         TestDelegate.IntAction act = TestDelegate.PrintInt;
         act(42);
         int[] a = new int[5] { 1, 2, 3, 4, 5 };
-        
+        Console.WriteLine("--------------");
+        TestDelegate.Perform(act, a);
     }
 }
