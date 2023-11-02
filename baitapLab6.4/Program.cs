@@ -3,11 +3,12 @@
 public class TestDelegate
 {
     public delegate void IntAction(int act);
-    public static void PrintInt(int act)
+    public event IntAction Action;
+    public void PrintInt(int act)
     {
         Console.WriteLine(act);
     }
-    public static void Perform(IntAction act, int[] a)
+    public void Perform(IntAction act, int[] a)
     {
         foreach (int i in a)
         {
@@ -19,10 +20,13 @@ public class Program
 {
     static void Main(string[] args)
     {
-        TestDelegate.IntAction act = TestDelegate.PrintInt;
+        TestDelegate t= new TestDelegate();
+        /*TestDelegate.IntAction act = t.PrintInt;
         act(42);
-        int[] a = new int[5] { 1, 2, 3, 4, 5 };
+        int[] a = { 1, 2, 3, 4, 5, 6 };
         Console.WriteLine("--------------");
-        TestDelegate.Perform(act, a);
+        t.Perform(act, a);*/
+        t.Action += new TestDelegate.IntAction(t.PrintInt);
+        t.PrintInt(42);
     }
 }
